@@ -1,14 +1,18 @@
 package com.ashish.ecom.service;
 
 import com.ashish.ecom.dto.FakestoreRessponseDTO;
+import com.ashish.ecom.dto.ProductRequestDTO;
+import com.ashish.ecom.dto.ProductResponseDTO;
 import com.ashish.ecom.entity.Product;
 import com.ashish.ecom.exception.ProductNotFoundException;
+import com.ashish.ecom.mapper.ProductEntityToProductResponseDTO;
 import com.ashish.ecom.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class SampleProductService {
@@ -18,25 +22,30 @@ public class SampleProductService {
 
 
 
-        public List<Product> getAllProduct() {
-            return productRepository.findAll();
+        public List<ProductResponseDTO> getAllProduct() {
+            List<Product> list = productRepository.findAll();
+            return list.stream().map(ProductEntityToProductResponseDTO ::convertEntityToDTO).collect(Collectors.toList());
+
         }
 
 
-        public Product createProduct(Product product) {
-            Product saveProduct = productRepository.save(product);
-            return saveProduct;
+        public ProductResponseDTO createProduct(ProductRequestDTO product) {
+            Product pp = ProductEntityToProductResponseDTO.convertDTOToEntity(product);
+            Product saveProduct = productRepository.save(pp);
+            return ProductEntityToProductResponseDTO.convertEntityToDTO(saveProduct);
+
         }
 
 
-        public Product getProduct(UUID id) {
-            return productRepository.findById(id).orElseThrow(
+        public ProductResponseDTO getProduct(UUID id) {
+            Product product =  productRepository.findById(id).orElseThrow(
                     ()-> new ProductNotFoundException("No product found for this Id")
             );
+            return ProductEntityToProductResponseDTO.convertEntityToDTO(product);
         }
 
 
-        public Product updateProduct(Product product, UUID id) {
+        public ProductResponseDTO updateProduct(ProductRequestDTO product, UUID id) {
             Product saved = productRepository.findById(id).orElseThrow(
                     ()-> new ProductNotFoundException("No product found for this Id")
             );
@@ -46,10 +55,11 @@ public class SampleProductService {
             saved.setTitle(product.getTitle());
             saved.setRating(product.getRating());
             saved.setPrice(product.getPrice());
-            saved.setImageUrl(product.getImageUrl());
+            saved.setImageUrl(product.getImage());
 
             saved = productRepository.save(saved);
-            return saved;
+            return ProductEntityToProductResponseDTO.convertEntityToDTO(saved);
+
         }
 
 
@@ -58,15 +68,19 @@ public class SampleProductService {
             return true;
         }
 
-        public List<Product> getProductBetween(double a, double b){
-            return productRepository.findByPriceBetween(a,b);
+        public List<ProductResponseDTO> getProductBetween(double a, double b){
+            List<Product> li = productRepository.findByPriceBetween(a,b);
+
+            return li.stream().map(ProductEntityToProductResponseDTO::convertEntityToDTO).collect(Collectors.toList());
         }
 
-        public Product getProductBasedOnTitle(String title){
-            return productRepository.findByTitle(title);
+        public ProductResponseDTO getProductBasedOnTitle(String title){
+
+            return ProductEntityToProductResponseDTO.convertEntityToDTO(productRepository.findByTitle(title));
         }
 
-        public List<Product> getProductBasedOnTitleLike(String title){
-            return productRepository.findByTitleEndingWith(title);
+        public List<ProductResponseDTO> getProductBasedOnTitleLike(String title){
+            List<Product> li = productRepository.findByTitleEndingWith(title);
+            return li.stream().map(ProductEntityToProductResponseDTO::convertEntityToDTO).collect(Collectors.toList());
         }
 }

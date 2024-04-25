@@ -7,13 +7,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class ProductResponseDTO {
+public class ProductRequestDTO {
 
-    private UUID productId;
+    private UUID id;
     private String title;
-    private String desc;
     private double price;
+    private String description;
     private String category;
-    private String imageUrl;
+    private String image;
     private double rating;
 }
