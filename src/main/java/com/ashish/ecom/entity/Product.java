@@ -1,6 +1,7 @@
 package com.ashish.ecom.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,8 @@ public class Product extends BaseModel{
     private String title;
     private String description;
     private double price;
-    private String category;
+    @ManyToOne
+    private Category category;
     private String imageUrl;
     private double rating;
 

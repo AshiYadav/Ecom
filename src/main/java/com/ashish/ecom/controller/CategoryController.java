@@ -1,4 +1,4 @@
-package com.ashish.ecom.component;
+package com.ashish.ecom.controller;
 
 import com.ashish.ecom.dto.CategoryReponseDTO;
 import com.ashish.ecom.dto.CategoryRequestDTO;

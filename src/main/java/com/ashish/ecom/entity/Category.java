@@ -2,9 +2,12 @@ package com.ashish.ecom.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,5 +16,6 @@ import java.util.UUID;
 public class Category extends BaseModel{
 
     String name;
-    UUID id;
+    @OneToMany
+    private List<Product> products;
 }

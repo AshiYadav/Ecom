@@ -1,14 +1,9 @@
-package com.ashish.ecom.component;
+package com.ashish.ecom.controller;
 
-import com.ashish.ecom.dto.FakestoreRessponseDTO;
 import com.ashish.ecom.dto.ProductRequestDTO;
 import com.ashish.ecom.dto.ProductResponseDTO;
-import com.ashish.ecom.entity.Product;
-import com.ashish.ecom.mapper.ProductEntityToProductResponseDTO;
-import com.ashish.ecom.service.ProductService;
 import com.ashish.ecom.service.SampleProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

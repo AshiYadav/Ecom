@@ -1,6 +1,6 @@
 package com.ashish.ecom.exception;
 
-import com.ashish.ecom.component.ProductController;
+import com.ashish.ecom.controller.ProductController;
 import com.ashish.ecom.dto.Exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

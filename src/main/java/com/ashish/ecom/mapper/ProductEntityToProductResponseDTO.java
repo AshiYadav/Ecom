@@ -10,7 +10,7 @@ public class ProductEntityToProductResponseDTO {
         ProductResponseDTO dto = new ProductResponseDTO();
 //        dto.setProductId(product.getId());
         dto.setDesc(product.getDescription());
-        dto.setCategory(product.getCategory());
+        dto.setCategory(product.getCategory().getName());
         dto.setPrice(product.getPrice());
         dto.setTitle(product.getTitle());
         dto.setRating(product.getRating());
@@ -20,7 +20,7 @@ public class ProductEntityToProductResponseDTO {
 
     public  static Product convertDTOToEntity(ProductRequestDTO dto){
         Product pro = new Product();
-        pro.setCategory(dto.getCategory());
+        //pro.setCategory(dto.getCategory());
         pro.setRating(dto.getRating());
         pro.setPrice(dto.getPrice());
         pro.setTitle(dto.getTitle());

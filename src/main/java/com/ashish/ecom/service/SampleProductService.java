@@ -50,7 +50,7 @@ public class SampleProductService {
                     ()-> new ProductNotFoundException("No product found for this Id")
             );
 
-            saved.setCategory(product.getCategory());
+//            saved.setCategory(product.getCategory());
             saved.setDescription(product.getDescription());
             saved.setTitle(product.getTitle());
             saved.setRating(product.getRating());
