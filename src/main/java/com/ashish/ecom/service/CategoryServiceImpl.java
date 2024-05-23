@@ -3,6 +3,7 @@ package com.ashish.ecom.service;
 import com.ashish.ecom.dto.CategoryReponseDTO;
 import com.ashish.ecom.dto.CategoryRequestDTO;
 import com.ashish.ecom.entity.Category;
+import com.ashish.ecom.entity.Product;
 import com.ashish.ecom.exception.CategoryNotFoundException;
 import com.ashish.ecom.mapper.CategoryMapper;
 import com.ashish.ecom.repository.CategoryRepository;
@@ -61,5 +62,25 @@ public class CategoryServiceImpl implements CategoryService{
 
         categoryRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public double getTotalPrice(UUID id) {
+
+        Category cat = categoryRepository.findById(id).orElseThrow(() -> {
+            return new CategoryNotFoundException("Category not found");
+        });
+
+        if(cat.getProducts().isEmpty()){
+            return 0.00;
+        }
+        else{
+            double total = 0.00;
+                for (Product pro : cat.getProducts()) {
+                    total += pro.getPrice();
+                }
+            return total;
+        }
+
     }
 }

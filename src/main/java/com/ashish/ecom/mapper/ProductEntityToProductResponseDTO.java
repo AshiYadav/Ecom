@@ -10,7 +10,12 @@ public class ProductEntityToProductResponseDTO {
         ProductResponseDTO dto = new ProductResponseDTO();
 //        dto.setProductId(product.getId());
         dto.setDesc(product.getDescription());
-        dto.setCategory(product.getCategory().getName());
+        if(product.getCategory() != null) {
+            dto.setCategory(product.getCategory().getName());
+        }
+        else{
+            dto.setCategory("");
+        }
         dto.setPrice(product.getPrice());
         dto.setTitle(product.getTitle());
         dto.setRating(product.getRating());
